@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculator API</title>
+  <title>CalcX</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,14 +35,9 @@
       color: var(--text);
     }
 
-    .wrapper {
-      width: 100%;
-      max-width: 480px;
-    }
+    .wrapper { width: 100%; max-width: 480px; }
 
-    header {
-      margin-bottom: 2.5rem;
-    }
+    header { margin-bottom: 2.5rem; }
 
     .logo {
       display: flex;
@@ -64,11 +59,8 @@
       50% { opacity: 0.4; transform: scale(0.8); }
     }
 
-    h1 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
+    h1 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.04em; }
+    h1 span { font-weight: 300; opacity: 0.4; }
 
     .subtitle {
       font-size: 0.8rem;
@@ -85,9 +77,7 @@
       box-shadow: var(--shadow);
     }
 
-    .field {
-      margin-bottom: 1.5rem;
-    }
+    .field { margin-bottom: 1.5rem; }
 
     label {
       display: block;
@@ -99,11 +89,7 @@
       margin-bottom: 0.6rem;
     }
 
-    .ops {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+    .ops { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
     .op-btn {
       padding: 0.65rem 1rem;
@@ -118,18 +104,10 @@
       text-align: left;
     }
 
-    .op-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    .op-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .op-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 
-    .op-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
-
-    input[type="text"] {
+    input[type="text"], input[type="number"] {
       width: 100%;
       padding: 0.75rem 1rem;
       border: 1.5px solid var(--border);
@@ -142,20 +120,13 @@
       transition: border-color 0.15s;
     }
 
-    input[type="text"]:focus {
-      border-color: var(--accent);
-    }
+    input[type="text"]:focus, input[type="number"]:focus { border-color: var(--accent); }
+    input::placeholder { color: #ccc; }
 
-    input[type="text"]::placeholder {
-      color: #ccc;
-    }
+    .hint { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
 
-    .hint {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
-      font-family: 'DM Mono', monospace;
-    }
+    .base-field { margin-bottom: 1.5rem; display: none; animation: slideIn 0.2s ease; }
+    .base-field.visible { display: block; }
 
     .submit-btn {
       width: 100%;
@@ -189,68 +160,23 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .result-box.success {
-      background: #f0faf5;
-      border: 1.5px solid #b7e4c7;
-      display: block;
-    }
+    .result-box.success { background: #f0faf5; border: 1.5px solid #b7e4c7; display: block; }
+    .result-box.error { background: #fff5f5; border: 1.5px solid #f5c2c2; display: block; }
 
-    .result-box.error {
-      background: #fff5f5;
-      border: 1.5px solid #f5c2c2;
-      display: block;
-    }
-
-    .result-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
+    .result-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
     .result-box.success .result-label { color: var(--success); }
     .result-box.error .result-label { color: var(--error); }
 
-    .result-value {
-      font-family: 'DM Mono', monospace;
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: var(--text);
-    }
+    .result-value { font-family: 'DM Mono', monospace; font-size: 1.6rem; font-weight: 500; color: var(--text); word-break: break-all; }
+    .result-box.error .result-value { font-size: 0.9rem; color: var(--error); }
 
-    .result-box.error .result-value {
-      font-size: 0.9rem;
-      color: var(--error);
-    }
+    .result-op { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; font-family: 'DM Mono', monospace; }
 
-    .result-op {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      font-family: 'DM Mono', monospace;
-    }
+    .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 1.5rem 0;
-    }
+    .history-section h2 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
 
-    .history-section h2 {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .history-list { display: flex; flex-direction: column; gap: 6px; }
 
     .history-item {
       display: flex;
@@ -264,31 +190,11 @@
       animation: slideIn 0.2s ease;
     }
 
-    .history-op {
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-    }
+    .history-op { color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+    .history-result { font-weight: 500; color: var(--text); max-width: 60%; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    .history-result {
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    footer {
-      margin-top: 1.5rem;
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-family: 'DM Mono', monospace;
-    }
-
-    footer a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-    }
+    footer { margin-top: 1.5rem; text-align: center; font-size: 0.72rem; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+    footer a { color: var(--text); text-decoration: none; font-weight: 500; }
   </style>
 </head>
 <body>
@@ -296,13 +202,12 @@
     <header>
       <div class="logo">
         <div class="logo-dot"></div>
-        <h1>Calculator API</h1>
+        <h1>Calc<span>X</span></h1>
       </div>
       <p class="subtitle">localhost:8000 → connected</p>
     </header>
 
     <div class="card">
-      <!-- Operation selector -->
       <div class="field">
         <label>Operation</label>
         <div class="ops">
@@ -310,19 +215,23 @@
           <button class="op-btn" data-op="product">× product</button>
           <button class="op-btn" data-op="difference">− difference</button>
           <button class="op-btn" data-op="division">÷ division</button>
+          <button class="op-btn" data-op="log" style="grid-column: span 2;">㏒ logarithm</button>
         </div>
       </div>
 
-      <!-- Numbers input -->
       <div class="field">
         <label>Numbers</label>
-        <input type="text" id="numbers-input" placeholder="10, 20, 30" />
+        <input type="text" id="numbers-input" placeholder="10, 100, 1000" />
         <p class="hint">separate numbers with commas</p>
+      </div>
+
+      <div class="base-field" id="base-field">
+        <label>Base <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional — leave empty for natural log)</span></label>
+        <input type="number" id="base-input" placeholder="e.g. 10" min="0" step="any"/>
       </div>
 
       <button class="submit-btn" id="calculate-btn">Calculate</button>
 
-      <!-- Result -->
       <div class="result-box" id="result-box">
         <div class="result-label" id="result-label">Result</div>
         <div class="result-value" id="result-value"></div>
@@ -331,11 +240,10 @@
 
       <div class="divider"></div>
 
-      <!-- History -->
       <div class="history-section">
         <h2>Recent</h2>
         <div class="history-list" id="history-list">
-          <div class="history-item" style="color: #ccc; font-size:0.75rem; justify-content:center;">
+          <div class="history-item" style="color:#ccc;font-size:0.75rem;justify-content:center;">
             no calculations yet
           </div>
         </div>
@@ -343,7 +251,7 @@
     </div>
 
     <footer>
-      built with FastAPI + vanilla JS &nbsp;·&nbsp;
+      CalcX · built with FastAPI + vanilla JS &nbsp;·&nbsp;
       <a href="http://127.0.0.1:8000/docs" target="_blank">api docs →</a>
     </footer>
   </div>
@@ -353,48 +261,47 @@
     let selectedOp = 'sum';
     const history = [];
 
-    // Operation buttons
     document.querySelectorAll('.op-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         selectedOp = btn.dataset.op;
+        const baseField = document.getElementById('base-field');
+        if (selectedOp === 'log') {
+          baseField.classList.add('visible');
+        } else {
+          baseField.classList.remove('visible');
+          document.getElementById('base-input').value = '';
+        }
       });
     });
 
-    // Calculate
     document.getElementById('calculate-btn').addEventListener('click', async () => {
       const input = document.getElementById('numbers-input').value;
-      const numbers = input.split(',').map(n => Number(n.trim())).filter(n => !isNaN(n));
-
+      const numbers = input.split(',').map(n => Number(n.trim())).filter(n => !isNaN(n) && n !== '');
+      const baseInput = document.getElementById('base-input').value;
+      const base = baseInput !== '' ? parseFloat(baseInput) : null;
       const btn = document.getElementById('calculate-btn');
-      const resultBox = document.getElementById('result-box');
 
-      if (numbers.length === 0) {
-        showError('please enter at least one number');
-        return;
-      }
+      if (numbers.length === 0) { showError('please enter at least one number'); return; }
 
       btn.disabled = true;
       btn.textContent = 'Calculating...';
 
       try {
+        const body = { operation: selectedOp, numbers };
+        if (selectedOp === 'log') body.base = base;
+
         const res = await fetch(`${API}/calculate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ operation: selectedOp, numbers })
+          body: JSON.stringify(body)
         });
 
         const data = await res.json();
-
-        if (!res.ok) {
-          showError(data.detail || 'something went wrong');
-          return;
-        }
-
-        showSuccess(data.result, data.operation, numbers);
+        if (!res.ok) { showError(data.detail || 'something went wrong'); return; }
+        showSuccess(data.result, data.operation, numbers, base);
         addToHistory(data.operation, data.result);
-
       } catch (err) {
         showError('cannot connect to API — is the server running?');
       } finally {
@@ -403,12 +310,18 @@
       }
     });
 
-    function showSuccess(result, op, numbers) {
+    function formatResult(result) {
+      if (Array.isArray(result)) return result.map(n => parseFloat(n.toFixed(6))).join(', ');
+      return typeof result === 'number' ? parseFloat(result.toFixed(6)) : result;
+    }
+
+    function showSuccess(result, op, numbers, base) {
       const box = document.getElementById('result-box');
       box.className = 'result-box success';
       document.getElementById('result-label').textContent = 'Result';
-      document.getElementById('result-value').textContent = result;
-      document.getElementById('result-op').textContent = `${op} of [${numbers.join(', ')}]`;
+      document.getElementById('result-value').textContent = formatResult(result);
+      const baseStr = op === 'log' ? (base ? ` (base ${base})` : ' (natural log)') : '';
+      document.getElementById('result-op').textContent = `${op}${baseStr} of [${numbers.join(', ')}]`;
     }
 
     function showError(msg) {
@@ -434,12 +347,11 @@
       list.innerHTML = history.map(h => `
         <div class="history-item">
           <span class="history-op">${h.op}</span>
-          <span class="history-result">${h.result}</span>
+          <span class="history-result">${formatResult(h.result)}</span>
         </div>
       `).join('');
     }
 
-    // Allow Enter key
     document.getElementById('numbers-input').addEventListener('keydown', e => {
       if (e.key === 'Enter') document.getElementById('calculate-btn').click();
     });
