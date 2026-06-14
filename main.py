@@ -3,6 +3,7 @@
 import logging
 from database import create_table, save_calculation, get_history
 from datetime import datetime
+from fastapi.responses import FileResponse
 from exceptions import CalculatorError, EmptyListError, DivisionByZeroError, LogarithmError
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,6 +23,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="CalcX API", version="1.0.0")
+
 create_table()
 
 app.add_middleware(
@@ -38,6 +40,10 @@ operations = {
     "division": calculate_division,
     "log": logarithms
 }
+
+@app.get("/app", tags=["Frontend"])
+def frontend():
+    return FileResponse("index.html")
 
 @app.get("/", tags=["Health"])
 def home():
