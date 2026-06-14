@@ -105,3 +105,22 @@ POST /calculate
 ---
 
 built by [DR4VEN](https://github.com/dr6719010-dot) · pre-college, aspiring backend/devops engineer
+## Logarithm Operations
+
+CalcX now supports logarithmic calculations with dynamic base selection.
+
+### Features
+- Supports custom logarithm bases
+- Handles natural logarithms (`base e`)
+- Input validation for invalid log operations
+- Dynamic interface rendering for log-specific inputs
+- Proper exception handling for mathematical edge cases
+
+### Example Request
+
+```json
+{
+  "operation": "log",
+  "number": 100,
+  "base": 10
+}
