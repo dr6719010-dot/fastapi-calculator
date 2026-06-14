@@ -1,6 +1,7 @@
 """FastAPI calculator application with history tracking and logging."""
 
 import logging
+import os
 from database import create_table, save_calculation, get_history
 from datetime import datetime
 from fastapi.responses import FileResponse
@@ -43,7 +44,8 @@ operations = {
 
 @app.get("/app", tags=["Frontend"])
 def frontend():
-    return FileResponse("index.html")
+    path = os.path.join(os.path.dirname(__file__), "index.html")
+    return FileResponse(path)
 
 @app.get("/", tags=["Health"])
 def home():
