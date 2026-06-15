@@ -1,126 +1,125 @@
-# calculator-api
+# CalcX 🚀
 
-my first project that actually worked lol
+A full-stack calculator web application built with FastAPI, Vanilla JavaScript, and SQLite.
 
-a full stack calculator built with FastAPI on the backend and vanilla JS on the frontend. you type numbers, pick an operation, hit calculate — it calls a real API and gives you the result. nothing crazy, but it's mine and it runs.
+## 🌐 Live Demo
 
----
+**Frontend:**
+https://calcx-jhx4.onrender.com/app
 
-## what it does
-
-- **4 operations** — sum, product, difference, division
-- **input validation** — handles empty lists, division by zero, wrong data types
-- **recent history** — tracks your last 5 calculations
-- **auto-generated API docs** at `/docs` (FastAPI does this for free)
+**API Documentation:**
+https://calcx-jhx4.onrender.com/docs
 
 ---
 
-## tech stack
+## ✨ Features
 
-| Layer | Tech |
-|-------|------|
-| Backend | Python, FastAPI |
-| Validation | Pydantic |
-| Frontend | HTML, CSS, Vanilla JS |
-| Server | Uvicorn |
-| Version Control | Git + GitHub |
+* Addition
+* Subtraction
+* Multiplication
+* Division
+* Logarithms
+* Calculation history tracking
+* SQLite database persistence
+* REST API endpoints
+* Interactive Swagger documentation
+* Responsive web interface
 
 ---
 
-## how to run it
+## 🛠️ Tech Stack
 
-**1. clone the repo**
-```bash
-git clone https://github.com/dr6719010-dot/calculator-api.git
-cd calculator-api
+### Backend
+
+* Python
+* FastAPI
+* SQLite
+* Uvicorn
+
+### Frontend
+
+* HTML
+* CSS
+* Vanilla JavaScript
+
+### Deployment
+
+* Render
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint     | Description           |
+| ------ | ------------ | --------------------- |
+| GET    | `/`          | Health Check          |
+| GET    | `/app`       | Frontend Interface    |
+| GET    | `/history`   | Calculation History   |
+| POST   | `/calculate` | Perform Calculations  |
+| GET    | `/docs`      | Swagger Documentation |
+
+---
+
+## Example Request
+
+```json
+{
+  "numbers": [5, 2],
+  "operation": "division"
+}
 ```
 
-**2. install dependencies**
-```bash
-pip install fastapi uvicorn
+## Example Response
+
+```json
+{
+  "operation": "division",
+  "result": 2.5
+}
 ```
 
-**3. start the backend**
+---
+
+## 🚀 Running Locally
+
 ```bash
+git clone https://github.com/dr6719010-dot/fastapi-calculator.git
+
+cd fastapi-calculator
+
+pip install -r requirements.txt
+
 uvicorn main:app --reload
 ```
 
-**4. open the frontend**
+Open:
 
-just open `index.html` in your browser. that's it.
-
-API runs on `http://127.0.0.1:8000`
-Docs available at `http://127.0.0.1:8000/docs`
-
----
-
-## project structure
-
-```
-calculator-api/
-├── main.py          # FastAPI routes
-├── calculator.py    # core logic (sum, product, difference, division)
-├── models.py        # Pydantic request model
-├── index.html       # frontend UI
-└── .gitignore
+```text
+http://127.0.0.1:8000/app
 ```
 
 ---
 
-## API endpoints
+## 📚 What I Learned
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | health check |
-| POST | `/calculate` | runs a calculation |
-| GET | `/history` | returns last 3 calculations |
-
-**example request:**
-```json
-POST /calculate
-{
-  "operation": "sum",
-  "numbers": [10, 20, 30]
-}
-```
-
-**example response:**
-```json
-{
-  "operation": "sum",
-  "result": 60
-}
-```
+* Building REST APIs using FastAPI
+* Creating custom exception handling
+* Working with SQLite databases
+* Logging and debugging techniques
+* Frontend-backend integration
+* Git and GitHub workflows
+* Cloud deployment and hosting
+* Debugging production issues
+* Troubleshooting API routing and networking problems
 
 ---
 
-## what i learned building this
+## 📈 Project Status
 
-- how to structure a backend API with FastAPI
-- git from scratch — init, commit, push, the whole thing
-- HTTP methods, status codes, CORS
-- connecting a frontend to a real backend
-- pydantic validation and why it matters
+✅ Live and deployed
 
 ---
 
-built by [DR4VEN](https://github.com/dr6719010-dot) · pre-college, aspiring backend/devops engineer
-## Logarithm Operations
+## 👨‍💻 Author
 
-CalcX now supports logarithmic calculations with dynamic base selection.
-
-### Features
-- Supports custom logarithm bases
-- Handles natural logarithms (`base e`)
-- Input validation for invalid log operations
-- Dynamic interface rendering for log-specific inputs
-- Proper exception handling for mathematical edge cases
-
-### Example Request
-
-```json
-{
-  "operation": "log",
-  "number": 100,
-  "base": 10
-}
+**Digvijay Rana**
