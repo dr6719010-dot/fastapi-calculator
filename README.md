@@ -1,3 +1,6 @@
+## personal note 
+* Took a big chunk of brain power main issue wasn't even the setting up backend and frontend THE MAIN HELL STARTED when, deployed it on railway live on my pc not at all working on others spent entire day behind doing changes in frontend and backend encountered DNS bugs rewrote the whole CORS configuration then after certain changes still no progress then next day shifted the deployment to render then realized i have 2 index.html and render served the older file with hardcoded url of railway sanity lost here. then after changing url realized acidentally added /calculate url then fixed it so the project was ready in 2 weeks but deployment took 5 days more. well yeahh quite a interesting project learnt a LOTTTT tbh . SO that's all my ranting plss check it out, point out bugs, i will respond and if i get good response i wil surely turn this into a proper scientific calculator and many more features SO hope u like this :-).
+
 # CalcX 🚀
 
 A full-stack calculator web application built with FastAPI, Vanilla JavaScript, and SQLite.
@@ -123,3 +126,5 @@ http://127.0.0.1:8000/app
 ## 👨‍💻 Author
 
 **Digvijay Rana**
+## personal note 
+* Took a big chunk of brain power main issue wasn't even the setting up backend and frontend THE MAIN HELL STARTED when, deployed it on railway live on my pc not at all working on others spent entire day behind doing changes in frontend and backend encountered DNS bugs rewrote the whole CORS configuration then after certain changes still no progress then next day shifted the deployment to render then realized i have 2 index.html and render served the older file with hardcoded url of railway sanity lost here. then after changing url realized acidentally added /calculate url then fixed it so the project was ready in 2 weeks but deployment took 5 days more. well yeahh quite a interesting project learnt a LOTTTT tbh . SO that's all my ranting plss check it out, point out bugs, i will respond and if i get good response i wil surely turn this into a proper scientific calculator and many more features SO hope u like this :D
